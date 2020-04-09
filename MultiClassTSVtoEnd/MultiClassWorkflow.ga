@@ -1,0 +1,1575 @@
+{
+    "a_galaxy_workflow": "true", 
+    "annotation": "", 
+    "format-version": "0.1", 
+    "name": "MultiClassWorkflow", 
+    "steps": {
+        "0": {
+            "annotation": "", 
+            "content_id": "merge_metadata", 
+            "errors": null, 
+            "id": 0, 
+            "input_connections": {}, 
+            "inputs": [
+                {
+                    "description": "runtime parameter for tool Merge Metadata", 
+                    "name": "input2"
+                }, 
+                {
+                    "description": "runtime parameter for tool Merge Metadata", 
+                    "name": "input1"
+                }
+            ], 
+            "label": null, 
+            "name": "Merge Metadata", 
+            "outputs": [
+                {
+                    "name": "output1", 
+                    "type": "tabular"
+                }
+            ], 
+            "position": {
+                "left": 200, 
+                "top": 200
+            }, 
+            "post_job_actions": {}, 
+            "tool_id": "merge_metadata", 
+            "tool_state": "{\"input2\": {\"__class__\": \"RuntimeValue\"}, \"__page__\": null, \"__rerun_remap_job_id__\": null, \"input1\": {\"__class__\": \"RuntimeValue\"}}", 
+            "tool_version": "0.1.0", 
+            "type": "tool", 
+            "uuid": "dc23bf4d-1028-4095-966a-e1270a22c753", 
+            "workflow_outputs": [
+                {
+                    "label": null, 
+                    "output_name": "output1", 
+                    "uuid": "fe5249ae-4e5b-4bcf-a812-e2fd2e8750a5"
+                }
+            ]
+        }, 
+        "1": {
+            "annotation": "", 
+            "content_id": "feature_selection", 
+            "errors": null, 
+            "id": 1, 
+            "input_connections": {
+                "input1": {
+                    "id": 0, 
+                    "output_name": "output1"
+                }
+            }, 
+            "inputs": [], 
+            "label": null, 
+            "name": "Feature Selection", 
+            "outputs": [
+                {
+                    "name": "output1", 
+                    "type": "tabular"
+                }
+            ], 
+            "position": {
+                "left": 454, 
+                "top": 200
+            }, 
+            "post_job_actions": {
+                "HideDatasetActionoutput1": {
+                    "action_arguments": {}, 
+                    "action_type": "HideDatasetAction", 
+                    "output_name": "output1"
+                }
+            }, 
+            "tool_id": "feature_selection", 
+            "tool_state": "{\"__page__\": null, \"__rerun_remap_job_id__\": null, \"Method_Select\": {\"FeatSelect\": \"Corr\", \"__current_case__\": 0, \"Coef\": \"0.8\"}, \"input1\": {\"__class__\": \"ConnectedValue\"}}", 
+            "tool_version": "0.1.0", 
+            "type": "tool", 
+            "uuid": "94c48bf9-bdd9-40d6-87e4-f19447e2432f", 
+            "workflow_outputs": []
+        }, 
+        "2": {
+            "annotation": "", 
+            "content_id": "feature_selection", 
+            "errors": null, 
+            "id": 2, 
+            "input_connections": {
+                "input1": {
+                    "id": 1, 
+                    "output_name": "output1"
+                }
+            }, 
+            "inputs": [], 
+            "label": null, 
+            "name": "Feature Selection", 
+            "outputs": [
+                {
+                    "name": "output1", 
+                    "type": "tabular"
+                }
+            ], 
+            "position": {
+                "left": 715, 
+                "top": 200
+            }, 
+            "post_job_actions": {}, 
+            "tool_id": "feature_selection", 
+            "tool_state": "{\"__page__\": null, \"__rerun_remap_job_id__\": null, \"Method_Select\": {\"FeatSelect\": \"SelBest\", \"SelBest\": \"50\", \"__current_case__\": 1}, \"input1\": {\"__class__\": \"ConnectedValue\"}}", 
+            "tool_version": "0.1.0", 
+            "type": "tool", 
+            "uuid": "16a1107f-5d58-420f-a724-5373e9e98db2", 
+            "workflow_outputs": [
+                {
+                    "label": null, 
+                    "output_name": "output1", 
+                    "uuid": "68f2701c-72f1-4939-a262-ccea28de0163"
+                }
+            ]
+        }, 
+        "3": {
+            "annotation": "", 
+            "content_id": "multi_class_prediction", 
+            "errors": null, 
+            "id": 3, 
+            "input_connections": {
+                "input1": {
+                    "id": 2, 
+                    "output_name": "output1"
+                }
+            }, 
+            "inputs": [], 
+            "label": null, 
+            "name": "Multi Class Prediction", 
+            "outputs": [
+                {
+                    "name": "output1", 
+                    "type": "tabular"
+                }, 
+                {
+                    "name": "output2", 
+                    "type": "html"
+                }
+            ], 
+            "position": {
+                "left": 976, 
+                "top": 200
+            }, 
+            "post_job_actions": {
+                "HideDatasetActionoutput1": {
+                    "action_arguments": {}, 
+                    "action_type": "HideDatasetAction", 
+                    "output_name": "output1"
+                }, 
+                "HideDatasetActionoutput2": {
+                    "action_arguments": {}, 
+                    "action_type": "HideDatasetAction", 
+                    "output_name": "output2"
+                }
+            }, 
+            "tool_id": "multi_class_prediction", 
+            "tool_state": "{\"__page__\": null, \"input1\": {\"__class__\": \"ConnectedValue\"}, \"scalling\": \"No_Scaler\", \"__rerun_remap_job_id__\": null, \"TestMethods\": {\"SelTestMethods\": \"Internal\", \"nFolds\": \"5\", \"__current_case__\": 0}, \"SelMLAlgo\": {\"MLAlgo\": \"SVMC\", \"__current_case__\": 0, \"settings\": {\"__current_case__\": 0, \"advanced\": \"simple\"}}}", 
+            "tool_version": "0.1.0", 
+            "type": "tool", 
+            "uuid": "36cbff2a-73ea-4bf8-8a4a-84d7ed45c8d1", 
+            "workflow_outputs": []
+        }, 
+        "4": {
+            "annotation": "", 
+            "content_id": "multi_class_prediction", 
+            "errors": null, 
+            "id": 4, 
+            "input_connections": {
+                "input1": {
+                    "id": 2, 
+                    "output_name": "output1"
+                }
+            }, 
+            "inputs": [], 
+            "label": null, 
+            "name": "Multi Class Prediction", 
+            "outputs": [
+                {
+                    "name": "output1", 
+                    "type": "tabular"
+                }, 
+                {
+                    "name": "output2", 
+                    "type": "html"
+                }
+            ], 
+            "position": {
+                "left": 976, 
+                "top": 350
+            }, 
+            "post_job_actions": {
+                "HideDatasetActionoutput1": {
+                    "action_arguments": {}, 
+                    "action_type": "HideDatasetAction", 
+                    "output_name": "output1"
+                }, 
+                "HideDatasetActionoutput2": {
+                    "action_arguments": {}, 
+                    "action_type": "HideDatasetAction", 
+                    "output_name": "output2"
+                }
+            }, 
+            "tool_id": "multi_class_prediction", 
+            "tool_state": "{\"__page__\": null, \"input1\": {\"__class__\": \"ConnectedValue\"}, \"scalling\": \"No_Scaler\", \"__rerun_remap_job_id__\": null, \"TestMethods\": {\"SelTestMethods\": \"Internal\", \"nFolds\": \"5\", \"__current_case__\": 0}, \"SelMLAlgo\": {\"MLAlgo\": \"SGDC\", \"__current_case__\": 1, \"settings\": {\"__current_case__\": 0, \"advanced\": \"simple\"}}}", 
+            "tool_version": "0.1.0", 
+            "type": "tool", 
+            "uuid": "a81c6188-54bf-42e5-938e-75f560591ad8", 
+            "workflow_outputs": []
+        }, 
+        "5": {
+            "annotation": "", 
+            "content_id": "multi_class_prediction", 
+            "errors": null, 
+            "id": 5, 
+            "input_connections": {
+                "input1": {
+                    "id": 2, 
+                    "output_name": "output1"
+                }
+            }, 
+            "inputs": [], 
+            "label": null, 
+            "name": "Multi Class Prediction", 
+            "outputs": [
+                {
+                    "name": "output1", 
+                    "type": "tabular"
+                }, 
+                {
+                    "name": "output2", 
+                    "type": "html"
+                }
+            ], 
+            "position": {
+                "left": 976, 
+                "top": 500
+            }, 
+            "post_job_actions": {
+                "HideDatasetActionoutput1": {
+                    "action_arguments": {}, 
+                    "action_type": "HideDatasetAction", 
+                    "output_name": "output1"
+                }, 
+                "HideDatasetActionoutput2": {
+                    "action_arguments": {}, 
+                    "action_type": "HideDatasetAction", 
+                    "output_name": "output2"
+                }
+            }, 
+            "tool_id": "multi_class_prediction", 
+            "tool_state": "{\"__page__\": null, \"input1\": {\"__class__\": \"ConnectedValue\"}, \"scalling\": \"Min_Max\", \"__rerun_remap_job_id__\": null, \"TestMethods\": {\"SelTestMethods\": \"Internal\", \"nFolds\": \"5\", \"__current_case__\": 0}, \"SelMLAlgo\": {\"MLAlgo\": \"DTC\", \"__current_case__\": 2, \"settings\": {\"__current_case__\": 0, \"advanced\": \"simple\"}}}", 
+            "tool_version": "0.1.0", 
+            "type": "tool", 
+            "uuid": "1f8723e6-099a-40cb-b354-b2d5a4e37b9b", 
+            "workflow_outputs": []
+        }, 
+        "6": {
+            "annotation": "", 
+            "content_id": "multi_class_prediction", 
+            "errors": null, 
+            "id": 6, 
+            "input_connections": {
+                "input1": {
+                    "id": 2, 
+                    "output_name": "output1"
+                }
+            }, 
+            "inputs": [], 
+            "label": null, 
+            "name": "Multi Class Prediction", 
+            "outputs": [
+                {
+                    "name": "output1", 
+                    "type": "tabular"
+                }, 
+                {
+                    "name": "output2", 
+                    "type": "html"
+                }
+            ], 
+            "position": {
+                "left": 976, 
+                "top": 650
+            }, 
+            "post_job_actions": {
+                "HideDatasetActionoutput1": {
+                    "action_arguments": {}, 
+                    "action_type": "HideDatasetAction", 
+                    "output_name": "output1"
+                }, 
+                "HideDatasetActionoutput2": {
+                    "action_arguments": {}, 
+                    "action_type": "HideDatasetAction", 
+                    "output_name": "output2"
+                }
+            }, 
+            "tool_id": "multi_class_prediction", 
+            "tool_state": "{\"__page__\": null, \"input1\": {\"__class__\": \"ConnectedValue\"}, \"scalling\": \"No_Scaler\", \"__rerun_remap_job_id__\": null, \"TestMethods\": {\"SelTestMethods\": \"Internal\", \"nFolds\": \"5\", \"__current_case__\": 0}, \"SelMLAlgo\": {\"MLAlgo\": \"GBC\", \"__current_case__\": 3, \"settings\": {\"__current_case__\": 0, \"advanced\": \"simple\"}}}", 
+            "tool_version": "0.1.0", 
+            "type": "tool", 
+            "uuid": "2f2c4730-360b-4f38-9b99-2a10cc056fcd", 
+            "workflow_outputs": []
+        }, 
+        "7": {
+            "annotation": "", 
+            "content_id": "multi_class_prediction", 
+            "errors": null, 
+            "id": 7, 
+            "input_connections": {
+                "input1": {
+                    "id": 2, 
+                    "output_name": "output1"
+                }
+            }, 
+            "inputs": [], 
+            "label": null, 
+            "name": "Multi Class Prediction", 
+            "outputs": [
+                {
+                    "name": "output1", 
+                    "type": "tabular"
+                }, 
+                {
+                    "name": "output2", 
+                    "type": "html"
+                }
+            ], 
+            "position": {
+                "left": 976, 
+                "top": 800
+            }, 
+            "post_job_actions": {
+                "HideDatasetActionoutput1": {
+                    "action_arguments": {}, 
+                    "action_type": "HideDatasetAction", 
+                    "output_name": "output1"
+                }, 
+                "HideDatasetActionoutput2": {
+                    "action_arguments": {}, 
+                    "action_type": "HideDatasetAction", 
+                    "output_name": "output2"
+                }
+            }, 
+            "tool_id": "multi_class_prediction", 
+            "tool_state": "{\"__page__\": null, \"input1\": {\"__class__\": \"ConnectedValue\"}, \"scalling\": \"No_Scaler\", \"__rerun_remap_job_id__\": null, \"TestMethods\": {\"SelTestMethods\": \"Internal\", \"nFolds\": \"5\", \"__current_case__\": 0}, \"SelMLAlgo\": {\"MLAlgo\": \"RFC\", \"__current_case__\": 4, \"settings\": {\"__current_case__\": 2, \"advanced\": \"deviance\"}}}", 
+            "tool_version": "0.1.0", 
+            "type": "tool", 
+            "uuid": "3adf2fcb-47e0-40e8-9b32-19dd3a3bdd88", 
+            "workflow_outputs": []
+        }, 
+        "8": {
+            "annotation": "", 
+            "content_id": "multi_class_prediction", 
+            "errors": null, 
+            "id": 8, 
+            "input_connections": {
+                "input1": {
+                    "id": 2, 
+                    "output_name": "output1"
+                }
+            }, 
+            "inputs": [], 
+            "label": null, 
+            "name": "Multi Class Prediction", 
+            "outputs": [
+                {
+                    "name": "output1", 
+                    "type": "tabular"
+                }, 
+                {
+                    "name": "output2", 
+                    "type": "html"
+                }
+            ], 
+            "position": {
+                "left": 976, 
+                "top": 950
+            }, 
+            "post_job_actions": {
+                "HideDatasetActionoutput1": {
+                    "action_arguments": {}, 
+                    "action_type": "HideDatasetAction", 
+                    "output_name": "output1"
+                }, 
+                "HideDatasetActionoutput2": {
+                    "action_arguments": {}, 
+                    "action_type": "HideDatasetAction", 
+                    "output_name": "output2"
+                }
+            }, 
+            "tool_id": "multi_class_prediction", 
+            "tool_state": "{\"__page__\": null, \"input1\": {\"__class__\": \"ConnectedValue\"}, \"scalling\": \"No_Scaler\", \"__rerun_remap_job_id__\": null, \"TestMethods\": {\"SelTestMethods\": \"Internal\", \"nFolds\": \"5\", \"__current_case__\": 0}, \"SelMLAlgo\": {\"MLAlgo\": \"LRC\", \"__current_case__\": 5, \"settings\": {\"__current_case__\": 2, \"advanced\": \"deviance\"}}}", 
+            "tool_version": "0.1.0", 
+            "type": "tool", 
+            "uuid": "c0c6d62f-b48a-434b-b68f-51e460e54cbf", 
+            "workflow_outputs": []
+        }, 
+        "9": {
+            "annotation": "", 
+            "content_id": "multi_class_prediction", 
+            "errors": null, 
+            "id": 9, 
+            "input_connections": {
+                "input1": {
+                    "id": 2, 
+                    "output_name": "output1"
+                }
+            }, 
+            "inputs": [], 
+            "label": null, 
+            "name": "Multi Class Prediction", 
+            "outputs": [
+                {
+                    "name": "output1", 
+                    "type": "tabular"
+                }, 
+                {
+                    "name": "output2", 
+                    "type": "html"
+                }
+            ], 
+            "position": {
+                "left": 976, 
+                "top": 1100
+            }, 
+            "post_job_actions": {
+                "HideDatasetActionoutput1": {
+                    "action_arguments": {}, 
+                    "action_type": "HideDatasetAction", 
+                    "output_name": "output1"
+                }, 
+                "HideDatasetActionoutput2": {
+                    "action_arguments": {}, 
+                    "action_type": "HideDatasetAction", 
+                    "output_name": "output2"
+                }
+            }, 
+            "tool_id": "multi_class_prediction", 
+            "tool_state": "{\"__page__\": null, \"input1\": {\"__class__\": \"ConnectedValue\"}, \"scalling\": \"No_Scaler\", \"__rerun_remap_job_id__\": null, \"TestMethods\": {\"SelTestMethods\": \"Internal\", \"nFolds\": \"5\", \"__current_case__\": 0}, \"SelMLAlgo\": {\"MLAlgo\": \"KNC\", \"__current_case__\": 6, \"settings\": {\"__current_case__\": 2, \"advanced\": \"deviance\"}}}", 
+            "tool_version": "0.1.0", 
+            "type": "tool", 
+            "uuid": "1b3699cb-a91a-4ba0-bac1-6d2ca7b34ac2", 
+            "workflow_outputs": []
+        }, 
+        "10": {
+            "annotation": "", 
+            "content_id": "multi_class_prediction", 
+            "errors": null, 
+            "id": 10, 
+            "input_connections": {
+                "input1": {
+                    "id": 2, 
+                    "output_name": "output1"
+                }
+            }, 
+            "inputs": [], 
+            "label": null, 
+            "name": "Multi Class Prediction", 
+            "outputs": [
+                {
+                    "name": "output1", 
+                    "type": "tabular"
+                }, 
+                {
+                    "name": "output2", 
+                    "type": "html"
+                }
+            ], 
+            "position": {
+                "left": 976, 
+                "top": 1250
+            }, 
+            "post_job_actions": {
+                "HideDatasetActionoutput1": {
+                    "action_arguments": {}, 
+                    "action_type": "HideDatasetAction", 
+                    "output_name": "output1"
+                }, 
+                "HideDatasetActionoutput2": {
+                    "action_arguments": {}, 
+                    "action_type": "HideDatasetAction", 
+                    "output_name": "output2"
+                }
+            }, 
+            "tool_id": "multi_class_prediction", 
+            "tool_state": "{\"__page__\": null, \"input1\": {\"__class__\": \"ConnectedValue\"}, \"scalling\": \"No_Scaler\", \"__rerun_remap_job_id__\": null, \"TestMethods\": {\"SelTestMethods\": \"Internal\", \"nFolds\": \"5\", \"__current_case__\": 0}, \"SelMLAlgo\": {\"MLAlgo\": \"GNBC\", \"__current_case__\": 7, \"settings\": {\"__current_case__\": 2, \"advanced\": \"deviance\"}}}", 
+            "tool_version": "0.1.0", 
+            "type": "tool", 
+            "uuid": "df370ffd-77d6-4df5-b4d3-1a85707d796b", 
+            "workflow_outputs": []
+        }, 
+        "11": {
+            "annotation": "", 
+            "content_id": "multi_class_prediction", 
+            "errors": null, 
+            "id": 11, 
+            "input_connections": {
+                "input1": {
+                    "id": 2, 
+                    "output_name": "output1"
+                }
+            }, 
+            "inputs": [], 
+            "label": null, 
+            "name": "Multi Class Prediction", 
+            "outputs": [
+                {
+                    "name": "output1", 
+                    "type": "tabular"
+                }, 
+                {
+                    "name": "output2", 
+                    "type": "html"
+                }
+            ], 
+            "position": {
+                "left": 976, 
+                "top": 1400
+            }, 
+            "post_job_actions": {
+                "HideDatasetActionoutput1": {
+                    "action_arguments": {}, 
+                    "action_type": "HideDatasetAction", 
+                    "output_name": "output1"
+                }, 
+                "HideDatasetActionoutput2": {
+                    "action_arguments": {}, 
+                    "action_type": "HideDatasetAction", 
+                    "output_name": "output2"
+                }
+            }, 
+            "tool_id": "multi_class_prediction", 
+            "tool_state": "{\"__page__\": null, \"input1\": {\"__class__\": \"ConnectedValue\"}, \"scalling\": \"Min_Max\", \"__rerun_remap_job_id__\": null, \"TestMethods\": {\"SelTestMethods\": \"Internal\", \"nFolds\": \"5\", \"__current_case__\": 0}, \"SelMLAlgo\": {\"MLAlgo\": \"SVMC\", \"__current_case__\": 0, \"settings\": {\"__current_case__\": 0, \"advanced\": \"simple\"}}}", 
+            "tool_version": "0.1.0", 
+            "type": "tool", 
+            "uuid": "ab7e996b-5671-41c7-8b26-a565d018f2de", 
+            "workflow_outputs": []
+        }, 
+        "12": {
+            "annotation": "", 
+            "content_id": "multi_class_prediction", 
+            "errors": null, 
+            "id": 12, 
+            "input_connections": {
+                "input1": {
+                    "id": 2, 
+                    "output_name": "output1"
+                }
+            }, 
+            "inputs": [], 
+            "label": null, 
+            "name": "Multi Class Prediction", 
+            "outputs": [
+                {
+                    "name": "output1", 
+                    "type": "tabular"
+                }, 
+                {
+                    "name": "output2", 
+                    "type": "html"
+                }
+            ], 
+            "position": {
+                "left": 976, 
+                "top": 1550
+            }, 
+            "post_job_actions": {
+                "HideDatasetActionoutput1": {
+                    "action_arguments": {}, 
+                    "action_type": "HideDatasetAction", 
+                    "output_name": "output1"
+                }, 
+                "HideDatasetActionoutput2": {
+                    "action_arguments": {}, 
+                    "action_type": "HideDatasetAction", 
+                    "output_name": "output2"
+                }
+            }, 
+            "tool_id": "multi_class_prediction", 
+            "tool_state": "{\"__page__\": null, \"input1\": {\"__class__\": \"ConnectedValue\"}, \"scalling\": \"Min_Max\", \"__rerun_remap_job_id__\": null, \"TestMethods\": {\"SelTestMethods\": \"Internal\", \"nFolds\": \"5\", \"__current_case__\": 0}, \"SelMLAlgo\": {\"MLAlgo\": \"SGDC\", \"__current_case__\": 1, \"settings\": {\"__current_case__\": 0, \"advanced\": \"simple\"}}}", 
+            "tool_version": "0.1.0", 
+            "type": "tool", 
+            "uuid": "61ffd25f-5c48-4d6e-a55f-e725161886f4", 
+            "workflow_outputs": []
+        }, 
+        "13": {
+            "annotation": "", 
+            "content_id": "multi_class_prediction", 
+            "errors": null, 
+            "id": 13, 
+            "input_connections": {
+                "input1": {
+                    "id": 2, 
+                    "output_name": "output1"
+                }
+            }, 
+            "inputs": [], 
+            "label": null, 
+            "name": "Multi Class Prediction", 
+            "outputs": [
+                {
+                    "name": "output1", 
+                    "type": "tabular"
+                }, 
+                {
+                    "name": "output2", 
+                    "type": "html"
+                }
+            ], 
+            "position": {
+                "left": 976, 
+                "top": 1700
+            }, 
+            "post_job_actions": {
+                "HideDatasetActionoutput1": {
+                    "action_arguments": {}, 
+                    "action_type": "HideDatasetAction", 
+                    "output_name": "output1"
+                }, 
+                "HideDatasetActionoutput2": {
+                    "action_arguments": {}, 
+                    "action_type": "HideDatasetAction", 
+                    "output_name": "output2"
+                }
+            }, 
+            "tool_id": "multi_class_prediction", 
+            "tool_state": "{\"__page__\": null, \"input1\": {\"__class__\": \"ConnectedValue\"}, \"scalling\": \"Min_Max\", \"__rerun_remap_job_id__\": null, \"TestMethods\": {\"SelTestMethods\": \"Internal\", \"nFolds\": \"5\", \"__current_case__\": 0}, \"SelMLAlgo\": {\"MLAlgo\": \"DTC\", \"__current_case__\": 2, \"settings\": {\"__current_case__\": 0, \"advanced\": \"simple\"}}}", 
+            "tool_version": "0.1.0", 
+            "type": "tool", 
+            "uuid": "793f3bc2-332c-436a-8408-68e2725904f5", 
+            "workflow_outputs": []
+        }, 
+        "14": {
+            "annotation": "", 
+            "content_id": "multi_class_prediction", 
+            "errors": null, 
+            "id": 14, 
+            "input_connections": {
+                "input1": {
+                    "id": 2, 
+                    "output_name": "output1"
+                }
+            }, 
+            "inputs": [], 
+            "label": null, 
+            "name": "Multi Class Prediction", 
+            "outputs": [
+                {
+                    "name": "output1", 
+                    "type": "tabular"
+                }, 
+                {
+                    "name": "output2", 
+                    "type": "html"
+                }
+            ], 
+            "position": {
+                "left": 976, 
+                "top": 1850
+            }, 
+            "post_job_actions": {
+                "HideDatasetActionoutput1": {
+                    "action_arguments": {}, 
+                    "action_type": "HideDatasetAction", 
+                    "output_name": "output1"
+                }, 
+                "HideDatasetActionoutput2": {
+                    "action_arguments": {}, 
+                    "action_type": "HideDatasetAction", 
+                    "output_name": "output2"
+                }
+            }, 
+            "tool_id": "multi_class_prediction", 
+            "tool_state": "{\"__page__\": null, \"input1\": {\"__class__\": \"ConnectedValue\"}, \"scalling\": \"Min_Max\", \"__rerun_remap_job_id__\": null, \"TestMethods\": {\"SelTestMethods\": \"Internal\", \"nFolds\": \"5\", \"__current_case__\": 0}, \"SelMLAlgo\": {\"MLAlgo\": \"GBC\", \"__current_case__\": 3, \"settings\": {\"__current_case__\": 0, \"advanced\": \"simple\"}}}", 
+            "tool_version": "0.1.0", 
+            "type": "tool", 
+            "uuid": "753753ae-648f-4c84-9681-12a26e26e2a2", 
+            "workflow_outputs": []
+        }, 
+        "15": {
+            "annotation": "", 
+            "content_id": "multi_class_prediction", 
+            "errors": null, 
+            "id": 15, 
+            "input_connections": {
+                "input1": {
+                    "id": 2, 
+                    "output_name": "output1"
+                }
+            }, 
+            "inputs": [], 
+            "label": null, 
+            "name": "Multi Class Prediction", 
+            "outputs": [
+                {
+                    "name": "output1", 
+                    "type": "tabular"
+                }, 
+                {
+                    "name": "output2", 
+                    "type": "html"
+                }
+            ], 
+            "position": {
+                "left": 976, 
+                "top": 2000
+            }, 
+            "post_job_actions": {
+                "HideDatasetActionoutput1": {
+                    "action_arguments": {}, 
+                    "action_type": "HideDatasetAction", 
+                    "output_name": "output1"
+                }, 
+                "HideDatasetActionoutput2": {
+                    "action_arguments": {}, 
+                    "action_type": "HideDatasetAction", 
+                    "output_name": "output2"
+                }
+            }, 
+            "tool_id": "multi_class_prediction", 
+            "tool_state": "{\"__page__\": null, \"input1\": {\"__class__\": \"ConnectedValue\"}, \"scalling\": \"Min_Max\", \"__rerun_remap_job_id__\": null, \"TestMethods\": {\"SelTestMethods\": \"Internal\", \"nFolds\": \"5\", \"__current_case__\": 0}, \"SelMLAlgo\": {\"MLAlgo\": \"LRC\", \"__current_case__\": 5, \"settings\": {\"__current_case__\": 2, \"advanced\": \"deviance\"}}}", 
+            "tool_version": "0.1.0", 
+            "type": "tool", 
+            "uuid": "21d072d8-2948-4f05-be5d-339eca511bf9", 
+            "workflow_outputs": []
+        }, 
+        "16": {
+            "annotation": "", 
+            "content_id": "multi_class_prediction", 
+            "errors": null, 
+            "id": 16, 
+            "input_connections": {
+                "input1": {
+                    "id": 2, 
+                    "output_name": "output1"
+                }
+            }, 
+            "inputs": [], 
+            "label": null, 
+            "name": "Multi Class Prediction", 
+            "outputs": [
+                {
+                    "name": "output1", 
+                    "type": "tabular"
+                }, 
+                {
+                    "name": "output2", 
+                    "type": "html"
+                }
+            ], 
+            "position": {
+                "left": 976, 
+                "top": 2150
+            }, 
+            "post_job_actions": {
+                "HideDatasetActionoutput1": {
+                    "action_arguments": {}, 
+                    "action_type": "HideDatasetAction", 
+                    "output_name": "output1"
+                }, 
+                "HideDatasetActionoutput2": {
+                    "action_arguments": {}, 
+                    "action_type": "HideDatasetAction", 
+                    "output_name": "output2"
+                }
+            }, 
+            "tool_id": "multi_class_prediction", 
+            "tool_state": "{\"__page__\": null, \"input1\": {\"__class__\": \"ConnectedValue\"}, \"scalling\": \"Min_Max\", \"__rerun_remap_job_id__\": null, \"TestMethods\": {\"SelTestMethods\": \"Internal\", \"nFolds\": \"5\", \"__current_case__\": 0}, \"SelMLAlgo\": {\"MLAlgo\": \"KNC\", \"__current_case__\": 6, \"settings\": {\"__current_case__\": 2, \"advanced\": \"deviance\"}}}", 
+            "tool_version": "0.1.0", 
+            "type": "tool", 
+            "uuid": "6ab90dbd-c37f-4d1a-b3ac-698c47014b98", 
+            "workflow_outputs": []
+        }, 
+        "17": {
+            "annotation": "", 
+            "content_id": "multi_class_prediction", 
+            "errors": null, 
+            "id": 17, 
+            "input_connections": {
+                "input1": {
+                    "id": 2, 
+                    "output_name": "output1"
+                }
+            }, 
+            "inputs": [], 
+            "label": null, 
+            "name": "Multi Class Prediction", 
+            "outputs": [
+                {
+                    "name": "output1", 
+                    "type": "tabular"
+                }, 
+                {
+                    "name": "output2", 
+                    "type": "html"
+                }
+            ], 
+            "position": {
+                "left": 976, 
+                "top": 2300
+            }, 
+            "post_job_actions": {
+                "HideDatasetActionoutput1": {
+                    "action_arguments": {}, 
+                    "action_type": "HideDatasetAction", 
+                    "output_name": "output1"
+                }, 
+                "HideDatasetActionoutput2": {
+                    "action_arguments": {}, 
+                    "action_type": "HideDatasetAction", 
+                    "output_name": "output2"
+                }
+            }, 
+            "tool_id": "multi_class_prediction", 
+            "tool_state": "{\"__page__\": null, \"input1\": {\"__class__\": \"ConnectedValue\"}, \"scalling\": \"Min_Max\", \"__rerun_remap_job_id__\": null, \"TestMethods\": {\"SelTestMethods\": \"Internal\", \"nFolds\": \"5\", \"__current_case__\": 0}, \"SelMLAlgo\": {\"MLAlgo\": \"GNBC\", \"__current_case__\": 7, \"settings\": {\"__current_case__\": 2, \"advanced\": \"deviance\"}}}", 
+            "tool_version": "0.1.0", 
+            "type": "tool", 
+            "uuid": "df18bd98-672e-4108-b39f-76ca5feb6f83", 
+            "workflow_outputs": []
+        }, 
+        "18": {
+            "annotation": "", 
+            "content_id": "multi_class_prediction", 
+            "errors": null, 
+            "id": 18, 
+            "input_connections": {
+                "input1": {
+                    "id": 2, 
+                    "output_name": "output1"
+                }
+            }, 
+            "inputs": [], 
+            "label": null, 
+            "name": "Multi Class Prediction", 
+            "outputs": [
+                {
+                    "name": "output1", 
+                    "type": "tabular"
+                }, 
+                {
+                    "name": "output2", 
+                    "type": "html"
+                }
+            ], 
+            "position": {
+                "left": 976, 
+                "top": 2450
+            }, 
+            "post_job_actions": {
+                "HideDatasetActionoutput1": {
+                    "action_arguments": {}, 
+                    "action_type": "HideDatasetAction", 
+                    "output_name": "output1"
+                }, 
+                "HideDatasetActionoutput2": {
+                    "action_arguments": {}, 
+                    "action_type": "HideDatasetAction", 
+                    "output_name": "output2"
+                }
+            }, 
+            "tool_id": "multi_class_prediction", 
+            "tool_state": "{\"__page__\": null, \"input1\": {\"__class__\": \"ConnectedValue\"}, \"scalling\": \"Min_Max\", \"__rerun_remap_job_id__\": null, \"TestMethods\": {\"SelTestMethods\": \"Internal\", \"nFolds\": \"5\", \"__current_case__\": 0}, \"SelMLAlgo\": {\"MLAlgo\": \"GNBC\", \"__current_case__\": 7, \"settings\": {\"__current_case__\": 2, \"advanced\": \"deviance\"}}}", 
+            "tool_version": "0.1.0", 
+            "type": "tool", 
+            "uuid": "fa652fc2-eb62-4ce9-8cf4-073f788e694b", 
+            "workflow_outputs": []
+        }, 
+        "19": {
+            "annotation": "", 
+            "content_id": "multi_class_prediction", 
+            "errors": null, 
+            "id": 19, 
+            "input_connections": {
+                "input1": {
+                    "id": 2, 
+                    "output_name": "output1"
+                }
+            }, 
+            "inputs": [], 
+            "label": null, 
+            "name": "Multi Class Prediction", 
+            "outputs": [
+                {
+                    "name": "output1", 
+                    "type": "tabular"
+                }, 
+                {
+                    "name": "output2", 
+                    "type": "html"
+                }
+            ], 
+            "position": {
+                "left": 976, 
+                "top": 2600
+            }, 
+            "post_job_actions": {
+                "HideDatasetActionoutput1": {
+                    "action_arguments": {}, 
+                    "action_type": "HideDatasetAction", 
+                    "output_name": "output1"
+                }, 
+                "HideDatasetActionoutput2": {
+                    "action_arguments": {}, 
+                    "action_type": "HideDatasetAction", 
+                    "output_name": "output2"
+                }
+            }, 
+            "tool_id": "multi_class_prediction", 
+            "tool_state": "{\"__page__\": null, \"input1\": {\"__class__\": \"ConnectedValue\"}, \"scalling\": \"Standard_Scaler\", \"__rerun_remap_job_id__\": null, \"TestMethods\": {\"SelTestMethods\": \"Internal\", \"nFolds\": \"5\", \"__current_case__\": 0}, \"SelMLAlgo\": {\"MLAlgo\": \"SVMC\", \"__current_case__\": 0, \"settings\": {\"__current_case__\": 0, \"advanced\": \"simple\"}}}", 
+            "tool_version": "0.1.0", 
+            "type": "tool", 
+            "uuid": "1eddb666-5c0c-4691-a789-d3b8e8c5f9d6", 
+            "workflow_outputs": []
+        }, 
+        "20": {
+            "annotation": "", 
+            "content_id": "multi_class_prediction", 
+            "errors": null, 
+            "id": 20, 
+            "input_connections": {
+                "input1": {
+                    "id": 2, 
+                    "output_name": "output1"
+                }
+            }, 
+            "inputs": [], 
+            "label": null, 
+            "name": "Multi Class Prediction", 
+            "outputs": [
+                {
+                    "name": "output1", 
+                    "type": "tabular"
+                }, 
+                {
+                    "name": "output2", 
+                    "type": "html"
+                }
+            ], 
+            "position": {
+                "left": 976, 
+                "top": 2750
+            }, 
+            "post_job_actions": {
+                "HideDatasetActionoutput1": {
+                    "action_arguments": {}, 
+                    "action_type": "HideDatasetAction", 
+                    "output_name": "output1"
+                }, 
+                "HideDatasetActionoutput2": {
+                    "action_arguments": {}, 
+                    "action_type": "HideDatasetAction", 
+                    "output_name": "output2"
+                }
+            }, 
+            "tool_id": "multi_class_prediction", 
+            "tool_state": "{\"__page__\": null, \"input1\": {\"__class__\": \"ConnectedValue\"}, \"scalling\": \"Standard_Scaler\", \"__rerun_remap_job_id__\": null, \"TestMethods\": {\"SelTestMethods\": \"Internal\", \"nFolds\": \"5\", \"__current_case__\": 0}, \"SelMLAlgo\": {\"MLAlgo\": \"SGDC\", \"__current_case__\": 1, \"settings\": {\"__current_case__\": 0, \"advanced\": \"simple\"}}}", 
+            "tool_version": "0.1.0", 
+            "type": "tool", 
+            "uuid": "50b949c3-a617-4ad5-a9bf-9a2562b2fe5b", 
+            "workflow_outputs": []
+        }, 
+        "21": {
+            "annotation": "", 
+            "content_id": "multi_class_prediction", 
+            "errors": null, 
+            "id": 21, 
+            "input_connections": {
+                "input1": {
+                    "id": 2, 
+                    "output_name": "output1"
+                }
+            }, 
+            "inputs": [], 
+            "label": null, 
+            "name": "Multi Class Prediction", 
+            "outputs": [
+                {
+                    "name": "output1", 
+                    "type": "tabular"
+                }, 
+                {
+                    "name": "output2", 
+                    "type": "html"
+                }
+            ], 
+            "position": {
+                "left": 976, 
+                "top": 2900
+            }, 
+            "post_job_actions": {
+                "HideDatasetActionoutput1": {
+                    "action_arguments": {}, 
+                    "action_type": "HideDatasetAction", 
+                    "output_name": "output1"
+                }, 
+                "HideDatasetActionoutput2": {
+                    "action_arguments": {}, 
+                    "action_type": "HideDatasetAction", 
+                    "output_name": "output2"
+                }
+            }, 
+            "tool_id": "multi_class_prediction", 
+            "tool_state": "{\"__page__\": null, \"input1\": {\"__class__\": \"ConnectedValue\"}, \"scalling\": \"Standard_Scaler\", \"__rerun_remap_job_id__\": null, \"TestMethods\": {\"SelTestMethods\": \"Internal\", \"nFolds\": \"5\", \"__current_case__\": 0}, \"SelMLAlgo\": {\"MLAlgo\": \"DTC\", \"__current_case__\": 2, \"settings\": {\"__current_case__\": 0, \"advanced\": \"simple\"}}}", 
+            "tool_version": "0.1.0", 
+            "type": "tool", 
+            "uuid": "f29469c2-0f90-496b-987a-a0ac3a16963a", 
+            "workflow_outputs": []
+        }, 
+        "22": {
+            "annotation": "", 
+            "content_id": "multi_class_prediction", 
+            "errors": null, 
+            "id": 22, 
+            "input_connections": {
+                "input1": {
+                    "id": 2, 
+                    "output_name": "output1"
+                }
+            }, 
+            "inputs": [], 
+            "label": null, 
+            "name": "Multi Class Prediction", 
+            "outputs": [
+                {
+                    "name": "output1", 
+                    "type": "tabular"
+                }, 
+                {
+                    "name": "output2", 
+                    "type": "html"
+                }
+            ], 
+            "position": {
+                "left": 976, 
+                "top": 3050
+            }, 
+            "post_job_actions": {
+                "HideDatasetActionoutput1": {
+                    "action_arguments": {}, 
+                    "action_type": "HideDatasetAction", 
+                    "output_name": "output1"
+                }, 
+                "HideDatasetActionoutput2": {
+                    "action_arguments": {}, 
+                    "action_type": "HideDatasetAction", 
+                    "output_name": "output2"
+                }
+            }, 
+            "tool_id": "multi_class_prediction", 
+            "tool_state": "{\"__page__\": null, \"input1\": {\"__class__\": \"ConnectedValue\"}, \"scalling\": \"Standard_Scaler\", \"__rerun_remap_job_id__\": null, \"TestMethods\": {\"SelTestMethods\": \"Internal\", \"nFolds\": \"5\", \"__current_case__\": 0}, \"SelMLAlgo\": {\"MLAlgo\": \"GBC\", \"__current_case__\": 3, \"settings\": {\"__current_case__\": 0, \"advanced\": \"simple\"}}}", 
+            "tool_version": "0.1.0", 
+            "type": "tool", 
+            "uuid": "4009be81-7124-428d-af02-b19c23038bd8", 
+            "workflow_outputs": []
+        }, 
+        "23": {
+            "annotation": "", 
+            "content_id": "multi_class_prediction", 
+            "errors": null, 
+            "id": 23, 
+            "input_connections": {
+                "input1": {
+                    "id": 2, 
+                    "output_name": "output1"
+                }
+            }, 
+            "inputs": [], 
+            "label": null, 
+            "name": "Multi Class Prediction", 
+            "outputs": [
+                {
+                    "name": "output1", 
+                    "type": "tabular"
+                }, 
+                {
+                    "name": "output2", 
+                    "type": "html"
+                }
+            ], 
+            "position": {
+                "left": 976, 
+                "top": 3200
+            }, 
+            "post_job_actions": {
+                "HideDatasetActionoutput1": {
+                    "action_arguments": {}, 
+                    "action_type": "HideDatasetAction", 
+                    "output_name": "output1"
+                }, 
+                "HideDatasetActionoutput2": {
+                    "action_arguments": {}, 
+                    "action_type": "HideDatasetAction", 
+                    "output_name": "output2"
+                }
+            }, 
+            "tool_id": "multi_class_prediction", 
+            "tool_state": "{\"__page__\": null, \"input1\": {\"__class__\": \"ConnectedValue\"}, \"scalling\": \"Standard_Scaler\", \"__rerun_remap_job_id__\": null, \"TestMethods\": {\"SelTestMethods\": \"Internal\", \"nFolds\": \"5\", \"__current_case__\": 0}, \"SelMLAlgo\": {\"MLAlgo\": \"RFC\", \"__current_case__\": 4, \"settings\": {\"__current_case__\": 2, \"advanced\": \"deviance\"}}}", 
+            "tool_version": "0.1.0", 
+            "type": "tool", 
+            "uuid": "3af810e4-1203-4013-ac7f-a381fe67bfad", 
+            "workflow_outputs": []
+        }, 
+        "24": {
+            "annotation": "", 
+            "content_id": "multi_class_prediction", 
+            "errors": null, 
+            "id": 24, 
+            "input_connections": {
+                "input1": {
+                    "id": 2, 
+                    "output_name": "output1"
+                }
+            }, 
+            "inputs": [], 
+            "label": null, 
+            "name": "Multi Class Prediction", 
+            "outputs": [
+                {
+                    "name": "output1", 
+                    "type": "tabular"
+                }, 
+                {
+                    "name": "output2", 
+                    "type": "html"
+                }
+            ], 
+            "position": {
+                "left": 976, 
+                "top": 3350
+            }, 
+            "post_job_actions": {
+                "HideDatasetActionoutput1": {
+                    "action_arguments": {}, 
+                    "action_type": "HideDatasetAction", 
+                    "output_name": "output1"
+                }, 
+                "HideDatasetActionoutput2": {
+                    "action_arguments": {}, 
+                    "action_type": "HideDatasetAction", 
+                    "output_name": "output2"
+                }
+            }, 
+            "tool_id": "multi_class_prediction", 
+            "tool_state": "{\"__page__\": null, \"input1\": {\"__class__\": \"ConnectedValue\"}, \"scalling\": \"Standard_Scaler\", \"__rerun_remap_job_id__\": null, \"TestMethods\": {\"SelTestMethods\": \"Internal\", \"nFolds\": \"5\", \"__current_case__\": 0}, \"SelMLAlgo\": {\"MLAlgo\": \"LRC\", \"__current_case__\": 5, \"settings\": {\"__current_case__\": 2, \"advanced\": \"deviance\"}}}", 
+            "tool_version": "0.1.0", 
+            "type": "tool", 
+            "uuid": "07198d24-3866-4243-895a-47b5c61ce6d8", 
+            "workflow_outputs": []
+        }, 
+        "25": {
+            "annotation": "", 
+            "content_id": "multi_class_prediction", 
+            "errors": null, 
+            "id": 25, 
+            "input_connections": {
+                "input1": {
+                    "id": 2, 
+                    "output_name": "output1"
+                }
+            }, 
+            "inputs": [], 
+            "label": null, 
+            "name": "Multi Class Prediction", 
+            "outputs": [
+                {
+                    "name": "output1", 
+                    "type": "tabular"
+                }, 
+                {
+                    "name": "output2", 
+                    "type": "html"
+                }
+            ], 
+            "position": {
+                "left": 976, 
+                "top": 3500
+            }, 
+            "post_job_actions": {
+                "HideDatasetActionoutput1": {
+                    "action_arguments": {}, 
+                    "action_type": "HideDatasetAction", 
+                    "output_name": "output1"
+                }, 
+                "HideDatasetActionoutput2": {
+                    "action_arguments": {}, 
+                    "action_type": "HideDatasetAction", 
+                    "output_name": "output2"
+                }
+            }, 
+            "tool_id": "multi_class_prediction", 
+            "tool_state": "{\"__page__\": null, \"input1\": {\"__class__\": \"ConnectedValue\"}, \"scalling\": \"Standard_Scaler\", \"__rerun_remap_job_id__\": null, \"TestMethods\": {\"SelTestMethods\": \"Internal\", \"nFolds\": \"5\", \"__current_case__\": 0}, \"SelMLAlgo\": {\"MLAlgo\": \"KNC\", \"__current_case__\": 6, \"settings\": {\"__current_case__\": 2, \"advanced\": \"deviance\"}}}", 
+            "tool_version": "0.1.0", 
+            "type": "tool", 
+            "uuid": "04684e46-008c-406a-85cb-2178bb30deb2", 
+            "workflow_outputs": []
+        }, 
+        "26": {
+            "annotation": "", 
+            "content_id": "multi_class_prediction", 
+            "errors": null, 
+            "id": 26, 
+            "input_connections": {
+                "input1": {
+                    "id": 2, 
+                    "output_name": "output1"
+                }
+            }, 
+            "inputs": [], 
+            "label": null, 
+            "name": "Multi Class Prediction", 
+            "outputs": [
+                {
+                    "name": "output1", 
+                    "type": "tabular"
+                }, 
+                {
+                    "name": "output2", 
+                    "type": "html"
+                }
+            ], 
+            "position": {
+                "left": 976, 
+                "top": 3650
+            }, 
+            "post_job_actions": {
+                "HideDatasetActionoutput1": {
+                    "action_arguments": {}, 
+                    "action_type": "HideDatasetAction", 
+                    "output_name": "output1"
+                }, 
+                "HideDatasetActionoutput2": {
+                    "action_arguments": {}, 
+                    "action_type": "HideDatasetAction", 
+                    "output_name": "output2"
+                }
+            }, 
+            "tool_id": "multi_class_prediction", 
+            "tool_state": "{\"__page__\": null, \"input1\": {\"__class__\": \"ConnectedValue\"}, \"scalling\": \"Standard_Scaler\", \"__rerun_remap_job_id__\": null, \"TestMethods\": {\"SelTestMethods\": \"Internal\", \"nFolds\": \"5\", \"__current_case__\": 0}, \"SelMLAlgo\": {\"MLAlgo\": \"GNBC\", \"__current_case__\": 7, \"settings\": {\"__current_case__\": 2, \"advanced\": \"deviance\"}}}", 
+            "tool_version": "0.1.0", 
+            "type": "tool", 
+            "uuid": "1a9370b1-ec57-4976-b6a4-e89ef5f68c6d", 
+            "workflow_outputs": []
+        }, 
+        "27": {
+            "annotation": "", 
+            "content_id": "merge_dataframe", 
+            "errors": null, 
+            "id": 27, 
+            "input_connections": {
+                "input1": [
+                    {
+                        "id": 4, 
+                        "output_name": "output1"
+                    }, 
+                    {
+                        "id": 5, 
+                        "output_name": "output1"
+                    }, 
+                    {
+                        "id": 8, 
+                        "output_name": "output1"
+                    }, 
+                    {
+                        "id": 7, 
+                        "output_name": "output1"
+                    }, 
+                    {
+                        "id": 3, 
+                        "output_name": "output1"
+                    }, 
+                    {
+                        "id": 9, 
+                        "output_name": "output1"
+                    }, 
+                    {
+                        "id": 6, 
+                        "output_name": "output1"
+                    }, 
+                    {
+                        "id": 10, 
+                        "output_name": "output1"
+                    }
+                ]
+            }, 
+            "inputs": [], 
+            "label": null, 
+            "name": "Merge Dataframe", 
+            "outputs": [
+                {
+                    "name": "output1", 
+                    "type": "tabular"
+                }
+            ], 
+            "position": {
+                "left": 1263, 
+                "top": 200
+            }, 
+            "post_job_actions": {
+                "HideDatasetActionoutput1": {
+                    "action_arguments": {}, 
+                    "action_type": "HideDatasetAction", 
+                    "output_name": "output1"
+                }
+            }, 
+            "tool_id": "merge_dataframe", 
+            "tool_state": "{\"__page__\": null, \"__rerun_remap_job_id__\": null, \"input1\": {\"__class__\": \"ConnectedValue\"}}", 
+            "tool_version": "0.1.0", 
+            "type": "tool", 
+            "uuid": "b24b3a2e-a084-4a3a-955e-f19c8bb02c7b", 
+            "workflow_outputs": []
+        }, 
+        "28": {
+            "annotation": "", 
+            "content_id": "merge_dataframe", 
+            "errors": null, 
+            "id": 28, 
+            "input_connections": {
+                "input1": [
+                    {
+                        "id": 11, 
+                        "output_name": "output1"
+                    }, 
+                    {
+                        "id": 13, 
+                        "output_name": "output1"
+                    }, 
+                    {
+                        "id": 14, 
+                        "output_name": "output1"
+                    }, 
+                    {
+                        "id": 12, 
+                        "output_name": "output1"
+                    }, 
+                    {
+                        "id": 15, 
+                        "output_name": "output1"
+                    }, 
+                    {
+                        "id": 16, 
+                        "output_name": "output1"
+                    }, 
+                    {
+                        "id": 17, 
+                        "output_name": "output1"
+                    }, 
+                    {
+                        "id": 18, 
+                        "output_name": "output1"
+                    }
+                ]
+            }, 
+            "inputs": [], 
+            "label": null, 
+            "name": "Merge Dataframe", 
+            "outputs": [
+                {
+                    "name": "output1", 
+                    "type": "tabular"
+                }
+            ], 
+            "position": {
+                "left": 1263, 
+                "top": 320
+            }, 
+            "post_job_actions": {
+                "HideDatasetActionoutput1": {
+                    "action_arguments": {}, 
+                    "action_type": "HideDatasetAction", 
+                    "output_name": "output1"
+                }
+            }, 
+            "tool_id": "merge_dataframe", 
+            "tool_state": "{\"__page__\": null, \"__rerun_remap_job_id__\": null, \"input1\": {\"__class__\": \"ConnectedValue\"}}", 
+            "tool_version": "0.1.0", 
+            "type": "tool", 
+            "uuid": "b048ac4a-0c74-4779-b552-addc6cce446e", 
+            "workflow_outputs": []
+        }, 
+        "29": {
+            "annotation": "", 
+            "content_id": "merge_dataframe", 
+            "errors": null, 
+            "id": 29, 
+            "input_connections": {
+                "input1": [
+                    {
+                        "id": 22, 
+                        "output_name": "output1"
+                    }, 
+                    {
+                        "id": 21, 
+                        "output_name": "output1"
+                    }, 
+                    {
+                        "id": 20, 
+                        "output_name": "output1"
+                    }, 
+                    {
+                        "id": 19, 
+                        "output_name": "output1"
+                    }, 
+                    {
+                        "id": 26, 
+                        "output_name": "output1"
+                    }, 
+                    {
+                        "id": 24, 
+                        "output_name": "output1"
+                    }, 
+                    {
+                        "id": 23, 
+                        "output_name": "output1"
+                    }, 
+                    {
+                        "id": 25, 
+                        "output_name": "output1"
+                    }
+                ]
+            }, 
+            "inputs": [], 
+            "label": null, 
+            "name": "Merge Dataframe", 
+            "outputs": [
+                {
+                    "name": "output1", 
+                    "type": "tabular"
+                }
+            ], 
+            "position": {
+                "left": 1263, 
+                "top": 440
+            }, 
+            "post_job_actions": {
+                "HideDatasetActionoutput1": {
+                    "action_arguments": {}, 
+                    "action_type": "HideDatasetAction", 
+                    "output_name": "output1"
+                }
+            }, 
+            "tool_id": "merge_dataframe", 
+            "tool_state": "{\"__page__\": null, \"__rerun_remap_job_id__\": null, \"input1\": {\"__class__\": \"ConnectedValue\"}}", 
+            "tool_version": "0.1.0", 
+            "type": "tool", 
+            "uuid": "55725e77-e752-4cdf-bddc-b7f7f8b68567", 
+            "workflow_outputs": []
+        }, 
+        "30": {
+            "annotation": "", 
+            "content_id": "heat_map", 
+            "errors": null, 
+            "id": 30, 
+            "input_connections": {
+                "input1": {
+                    "id": 27, 
+                    "output_name": "output1"
+                }
+            }, 
+            "inputs": [], 
+            "label": null, 
+            "name": "Heat Map", 
+            "outputs": [
+                {
+                    "name": "output2", 
+                    "type": "html"
+                }
+            ], 
+            "position": {
+                "left": 1524, 
+                "top": 200
+            }, 
+            "post_job_actions": {}, 
+            "tool_id": "heat_map", 
+            "tool_state": "{\"input2\": \"8\", \"input3\": \"10\", \"input1\": {\"__class__\": \"ConnectedValue\"}, \"input4\": \"20\", \"__page__\": null, \"__rerun_remap_job_id__\": null}", 
+            "tool_version": "0.1.0", 
+            "type": "tool", 
+            "uuid": "7e5c78a6-68b5-4662-871a-8128e7bbee03", 
+            "workflow_outputs": [
+                {
+                    "label": null, 
+                    "output_name": "output2", 
+                    "uuid": "dd9b8f41-c5ee-48b9-8b7c-73dba319d475"
+                }
+            ]
+        }, 
+        "31": {
+            "annotation": "", 
+            "content_id": "heat_map", 
+            "errors": null, 
+            "id": 31, 
+            "input_connections": {
+                "input1": {
+                    "id": 28, 
+                    "output_name": "output1"
+                }
+            }, 
+            "inputs": [], 
+            "label": null, 
+            "name": "Heat Map", 
+            "outputs": [
+                {
+                    "name": "output2", 
+                    "type": "html"
+                }
+            ], 
+            "position": {
+                "left": 1524, 
+                "top": 320
+            }, 
+            "post_job_actions": {}, 
+            "tool_id": "heat_map", 
+            "tool_state": "{\"input2\": \"8\", \"input3\": \"10\", \"input1\": {\"__class__\": \"ConnectedValue\"}, \"input4\": \"20\", \"__page__\": null, \"__rerun_remap_job_id__\": null}", 
+            "tool_version": "0.1.0", 
+            "type": "tool", 
+            "uuid": "6ec02136-682a-42c5-9a3d-0b09e5bf0673", 
+            "workflow_outputs": [
+                {
+                    "label": null, 
+                    "output_name": "output2", 
+                    "uuid": "8c6219b4-b10f-46f2-8608-04cba1c6a53f"
+                }
+            ]
+        }, 
+        "32": {
+            "annotation": "", 
+            "content_id": "heat_map", 
+            "errors": null, 
+            "id": 32, 
+            "input_connections": {
+                "input1": {
+                    "id": 29, 
+                    "output_name": "output1"
+                }
+            }, 
+            "inputs": [], 
+            "label": null, 
+            "name": "Heat Map", 
+            "outputs": [
+                {
+                    "name": "output2", 
+                    "type": "html"
+                }
+            ], 
+            "position": {
+                "left": 1524, 
+                "top": 440
+            }, 
+            "post_job_actions": {}, 
+            "tool_id": "heat_map", 
+            "tool_state": "{\"input2\": \"8\", \"input3\": \"10\", \"input1\": {\"__class__\": \"ConnectedValue\"}, \"input4\": \"20\", \"__page__\": null, \"__rerun_remap_job_id__\": null}", 
+            "tool_version": "0.1.0", 
+            "type": "tool", 
+            "uuid": "44bcbcb7-9d21-4345-8e0a-34801de7d407", 
+            "workflow_outputs": [
+                {
+                    "label": null, 
+                    "output_name": "output2", 
+                    "uuid": "7abe863c-7d00-4e7b-a953-e909bd16c33d"
+                }
+            ]
+        }
+    }, 
+    "tags": [], 
+    "uuid": "b3c59cd7-8037-469d-a316-6e7451be0dcc", 
+    "version": 17
+}
